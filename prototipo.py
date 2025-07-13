@@ -74,8 +74,8 @@ def cadastrar_livro(lista_livros: list[Livro]) -> bool:
         isbn = input("ISBN: ")
         editora = input("Editora: ")
         anoPublicacao = int(input("Ano de Publicação: "))
-        disponivel = input("Disponível? [S/n]")
-        disponivel = disponivel.upper() == "S"
+        disponivel = input("Disponível [S/n]?")
+        disponivel = disponivel.upper()[0] == "S"
 
         lista_livros.append(Livro(id, titulo, autor, isbn, editora, anoPublicacao, disponivel))
         print("Livro Cadastrado")
@@ -113,18 +113,29 @@ def atualizar_livro(lista_livros: list[Livro], id: str) -> bool:
         if novo_anoPublicacao != "":
             livro.anoPublicacao = int(novo_anoPublicacao)
 
-        disponivel = input(f"Disponível? [S/n]")
+        disponivel = input(f"Disponível [S/n]? ")
         if disponivel != "":
-            livro.disponivel = disponivel.upper() == "S"
+            livro.disponivel = disponivel.upper()[0] == "S"
 
         lista_livros[id] = livro
-        print(f"{lista_livros[id]}")
+
         print("LIVRO ATUALIZADO")
         return True
     except Exception as e:
         print("Erro ao atualizar o livro.")
         print(e)
         return False
+
+def listar_livros(lista_livros: list[Livro]) -> None:
+    for livro in lista_livros:
+        print(f"ID: {livro.id}")
+        print(f"\tTítulo: {livro.titulo}")
+        print(f"\tAutor: {livro.autor}")
+        print(f"\tISBN: {livro.isbn}")
+        print(f"\tEditora: {livro.editora}")
+        print(f"\tAno de Publicacao: {livro.anoPublicacao}")
+        disponivel = "SIM" if livro.disponivel else "NÃO"
+        print(f"\tDisponível: {disponivel}")
 
 if __name__ == "__main__":
     pass
