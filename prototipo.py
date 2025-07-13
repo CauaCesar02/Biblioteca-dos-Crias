@@ -63,3 +63,25 @@ class Livro:
     @disponivel.setter
     def disponivel(self, valor):
         self._disponivel = valor
+
+
+def cadastrar_livro(lista_livros: list[Livro]) -> bool:
+    print("CADASTRO DE LIVRO")
+    try:
+        id = len(lista_livros)
+        titulo = input("Título: ")
+        autor = input("Autor: ")
+        isbn = input("ISBN: ")
+        editora = input("Editora: ")
+        anoPublicacao = int(input("Ano de Publicação: "))
+        disponivel = input("Disponível? [S/n]")
+        disponivel = disponivel.upper() == "S"
+
+        lista_livros.append(Livro(id, titulo, autor, isbn, editora, anoPublicacao, disponivel))
+        return True
+    except Exception as e:
+        return False
+
+
+if __name__ == "__main__":
+    pass
