@@ -154,6 +154,18 @@ def consultar_livro_titulo(lista_livros: list[Livro]):
     print("Livro(s) encontrados:")
     listar_livros(consulta)
 
+def excluir_livro(lista_livros: list[Livro]):
+    id = input("ID do livro a ser excluído: ")
+    encontrado = False
+    for livro in lista_livros:
+        if id == livro.id:
+            encontrado = True
+            mostrar_livro(livro)
+            print("- Livro Excluído!")
+    
+    if not encontrado:
+        print("ID não encontrado.")
+
 
 if __name__ == "__main__":
     pass
