@@ -68,7 +68,7 @@ class Livro:
 def cadastrar_livro(lista_livros: list[Livro]) -> bool:
     print("CADASTRO DE LIVRO")
     try:
-        id = len(lista_livros)
+        id = str(len(lista_livros))
         titulo = input("Título: ")
         autor = input("Autor: ")
         isbn = input("ISBN: ")
@@ -78,10 +78,53 @@ def cadastrar_livro(lista_livros: list[Livro]) -> bool:
         disponivel = disponivel.upper() == "S"
 
         lista_livros.append(Livro(id, titulo, autor, isbn, editora, anoPublicacao, disponivel))
+        print("Livro Cadastrado")
         return True
     except Exception as e:
+        print("Erro ao cadastrar livro.")
+        print(e)
         return False
 
+
+def atualizar_livro(lista_livros: list[Livro], id: str) -> bool:
+    if id >= len(lista_livros):
+        print("Não foi encontrado o índice especificado. Tente atualizar os índices.")
+        return False
+    
+    livro: Livro = lista_livros[id]
+    try:
+        novo_titulo = input(f"Título [{livro.titulo}]: ")
+        if novo_titulo != "":
+            livro.titulo = novo_titulo
+
+        novo_autor = input(f"Autor [{livro.autor}]: ")
+        if novo_autor != "":
+            livro.autor = novo_autor
+
+        novo_isbn = input(f"ISBN [{livro.isbn}]: ")
+        if novo_isbn != "":
+            livro.isbn = novo_isbn
+
+        nova_editora = input(f"Editora [{livro.editora}]: ")
+        if nova_editora != "":
+            livro.editora = nova_editora
+
+        novo_anoPublicacao = input(f"Ano de Publicação [{livro.anoPublicacao}]: ")
+        if novo_anoPublicacao != "":
+            livro.anoPublicacao = int(novo_anoPublicacao)
+
+        disponivel = input(f"Disponível? [S/n]")
+        if disponivel != "":
+            livro.disponivel = disponivel.upper() == "S"
+
+        lista_livros[id] = livro
+        print(f"{lista_livros[id]}")
+        print("LIVRO ATUALIZADO")
+        return True
+    except Exception as e:
+        print("Erro ao atualizar o livro.")
+        print(e)
+        return False
 
 if __name__ == "__main__":
     pass
