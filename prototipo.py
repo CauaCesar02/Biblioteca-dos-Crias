@@ -86,7 +86,16 @@ def cadastrar_livro(lista_livros: list[Livro]) -> bool:
         return False
 
 
-def atualizar_livro(lista_livros: list[Livro], id: str) -> bool:
+def atualizar_livro(lista_livros: list[Livro]) -> bool:
+    try:
+        id = int(input("Digite o ID do livro a ser atualizado: "))
+    except ValueError:
+        print("Não foi possível reconhecer o número inteiro")
+        return False
+    except Exception as e:
+        print(e)
+        return False
+
     if id >= len(lista_livros):
         print("Não foi encontrado o índice especificado. Tente atualizar os índices.")
         return False
@@ -137,6 +146,10 @@ def mostrar_livro(livro: Livro):
     print(f"\tDisponível: {disponivel}")
 
 def listar_livros(lista_livros: list[Livro]) -> None:
+    if not len(lista_livros):
+        print("Nenhum livro cadastrado.")
+        return
+    
     for livro in lista_livros:
         mostrar_livro(livro)
 
@@ -161,11 +174,52 @@ def excluir_livro(lista_livros: list[Livro]):
         if id == livro.id:
             encontrado = True
             mostrar_livro(livro)
+            lista_livros.remove(livro)
             print("- Livro Excluído!")
     
     if not encontrado:
         print("ID não encontrado.")
 
+def menu():
+    print("Biblioteca dos Crias")
+    print("1- Mostrar todos livros cadastrados")
+    print("2- Cadastrar livro")
+    print("3- Atualizar livro")
+    print("4- Consultar livro pelo título")
+    print("5- Excluir livro")
+    print("0- Sair do sistema")
+
+def popular_livros_teste(lista_livros: list[Livro]):
+    livros.append(Livro(str(len(lista_livros)), 'IT: A coisa', 'Stephen King', '8560280944', 'Suma', 2014, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "Dom Casmurro", "Machado de Assis", "9788535910666", "Companhia das Letras", 2008, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "1984", "George Orwell", "9788535914848", "Companhia das Letras", 2009, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "O Senhor dos Anéis", "J.R.R. Tolkien", "9788595084742", "HarperCollins", 2019, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "Grande Sertão: Veredas", "João Guimarães Rosa", "9788583862094", "Nova Fronteira", 2016, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "A Revolução dos Bichos", "George Orwell", "9788535909554", "Companhia das Letras", 2007, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "O Nome da Rosa", "Umberto Eco", "9788535907239", "Record", 2001, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "Ensaio sobre a Cegueira", "José Saramago", "9788535914848", "Companhia das Letras", 1995, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "Cem Anos de Solidão", "Gabriel García Márquez", "9788535914849", "Record", 2003, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "O Pequeno Príncipe", "Antoine de Saint-Exupéry", "9788522031449", "Agir", 2009, False))
+    lista_livros.append(Livro(str(len(lista_livros)), "A Metamorfose", "Franz Kafka", "9788535914847", "Companhia das Letras", 2006, False))
+
 
 if __name__ == "__main__":
-    pass
+    livros: list[Livro] = []
+    popular_livros_teste(livros)
+    while True:
+        print("\n\n\n")
+        menu()
+        opcao = int(input("Escolha uma opção: "))
+        match(opcao):
+            case 1:
+                listar_livros(livros)
+            case 2:
+                cadastrar_livro(livros)
+            case 3:
+                atualizar_livro(livros)
+            case 4:
+                consultar_livro_titulo(livros)
+            case 5:
+                excluir_livro(livros)
+            case 0:
+                break
