@@ -140,6 +140,20 @@ def listar_livros(lista_livros: list[Livro]) -> None:
     for livro in lista_livros:
         mostrar_livro(livro)
 
+def consultar_livro_titulo(lista_livros: list[Livro]):
+    titulo = input(f"Título: ")
+    consulta: list[Livro]= []
+    for livro in lista_livros:
+        if titulo.lower() in livro.titulo.lower():
+            consulta.append(livro)
+
+    if not len(consulta):
+        print("Livro não encontrado.")
+        return
+    
+    print("Livro(s) encontrados:")
+    listar_livros(consulta)
+
 
 if __name__ == "__main__":
     pass
