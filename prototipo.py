@@ -126,16 +126,20 @@ def atualizar_livro(lista_livros: list[Livro], id: str) -> bool:
         print(e)
         return False
 
+def mostrar_livro(livro: Livro):
+    print(f"ID: {livro.id}")
+    print(f"\tTítulo: {livro.titulo}")
+    print(f"\tAutor: {livro.autor}")
+    print(f"\tISBN: {livro.isbn}")
+    print(f"\tEditora: {livro.editora}")
+    print(f"\tAno de Publicacao: {livro.anoPublicacao}")
+    disponivel = "SIM" if livro.disponivel else "NÃO"
+    print(f"\tDisponível: {disponivel}")
+
 def listar_livros(lista_livros: list[Livro]) -> None:
     for livro in lista_livros:
-        print(f"ID: {livro.id}")
-        print(f"\tTítulo: {livro.titulo}")
-        print(f"\tAutor: {livro.autor}")
-        print(f"\tISBN: {livro.isbn}")
-        print(f"\tEditora: {livro.editora}")
-        print(f"\tAno de Publicacao: {livro.anoPublicacao}")
-        disponivel = "SIM" if livro.disponivel else "NÃO"
-        print(f"\tDisponível: {disponivel}")
+        mostrar_livro(livro)
+
 
 if __name__ == "__main__":
     pass
