@@ -87,13 +87,14 @@ def cadastrar_livro(lista_livros: list[Livro]) -> bool:
 
 
 def atualizar_livro(lista_livros: list[Livro]) -> bool:
+    print("ATUALIZAÇÃO DE LIVRO")
     try:
         id = int(input("Digite o ID do livro a ser atualizado: "))
     except ValueError:
         print("Não foi possível reconhecer o número inteiro")
         return False
-    except Exception as e:
-        print(e)
+    except Exception:
+        print(Exception)
         return False
 
     if id >= len(lista_livros):
@@ -154,8 +155,9 @@ def listar_livros(lista_livros: list[Livro]) -> None:
         mostrar_livro(livro)
 
 def consultar_livro_titulo(lista_livros: list[Livro]):
+    print("CONSULTA DE LIVRO PELO TÍTULO")
     titulo = input(f"Título: ")
-    consulta: list[Livro]= []
+    consulta: list[Livro] = []
     for livro in lista_livros:
         if titulo.lower() in livro.titulo.lower():
             consulta.append(livro)
@@ -175,10 +177,16 @@ def excluir_livro(lista_livros: list[Livro]):
             encontrado = True
             mostrar_livro(livro)
             lista_livros.remove(livro)
+            corrigir_indices(lista_livros)
             print("- Livro Excluído!")
     
     if not encontrado:
         print("ID não encontrado.")
+
+def corrigir_indices(lista_livros: list[Livro]):
+    for indice, livro in enumerate(lista_livros):
+        if indice != int(livro.id):
+            livro.id = str(indice)
 
 def menu():
     print("Biblioteca dos Crias")
@@ -223,3 +231,6 @@ if __name__ == "__main__":
                 excluir_livro(livros)
             case 0:
                 break
+    
+    livro = Livro()
+    livro.titulo = "novo titulo"
