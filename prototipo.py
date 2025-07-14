@@ -231,6 +231,3 @@ if __name__ == "__main__":
                 excluir_livro(livros)
             case 0:
                 break
-    
-    livro = Livro()
-    livro.titulo = "novo titulo"
