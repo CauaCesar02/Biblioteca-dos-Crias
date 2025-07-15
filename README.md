@@ -41,3 +41,5 @@ python prototipo.py
 ```
 
 Siga as instruções exibidas no terminal para navegar pelo menu e realizar operações como cadastrar, atualizar, excluir, consultar e mostrar todos os livros.
+
+Easy demais!!!
